@@ -1,0 +1,357 @@
+:root {
+  color-scheme: dark;
+  --black: #111110;
+  --charcoal: #1b1a18;
+  --paper: #eee8d8;
+  --muted: #aaa292;
+  --wine: #8d2932;
+  --red: #bd5546;
+  --ochre: #c9aa72;
+  --rule: rgba(238,232,216,.2);
+}
+
+* { box-sizing: border-box; }
+html { min-width: 320px; min-height: 100%; background: var(--black); }
+body {
+  width: 100%;
+  height: 100svh;
+  min-width: 320px;
+  min-height: 620px;
+  margin: 0;
+  overflow: hidden;
+  background: var(--black);
+  color: var(--paper);
+  font-family: "DM Sans", sans-serif;
+}
+.masthead, .colophon {
+  position: relative;
+  z-index: 20;
+  height: 7vh;
+  min-height: 48px;
+  padding: 0 3.3vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--black);
+}
+.masthead { border-bottom: 1px solid var(--rule); }
+.wordmark { display: flex; align-items: center; gap: 10px; color: var(--paper); text-decoration: none; font: 700 11px "Space Grotesk", sans-serif; letter-spacing: .14em; }
+.wordmark i { color: var(--muted); font-style: normal; font-weight: 400; }
+.wordmark-mark { width: 25px; height: 25px; display: grid; place-items: center; border: 1px solid var(--red); border-radius: 50%; color: var(--red); font-size: 9px; letter-spacing: -.05em; }
+.masthead-center, .masthead-date, .colophon {
+  color: var(--muted);
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: .18em;
+}
+.masthead-date i { margin: 0 5px; color: var(--red); font-style: normal; }
+.mural {
+  position: relative;
+  width: 100%;
+  height: 86vh;
+  min-height: 530px;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse at 50% 49%, rgba(108,43,38,.22), transparent 31%),
+    radial-gradient(ellipse at 16% 79%, rgba(201,170,114,.08), transparent 29%),
+    var(--black);
+}
+.city-map {
+  position: absolute;
+  z-index: -3;
+  inset: -8%;
+  opacity: .31;
+  animation: map-drift 70s ease-in-out infinite alternate;
+}
+.city-map svg { width: 100%; height: 100%; }
+.city-map path { fill: none; stroke: rgba(201,170,114,.2); stroke-width: .8; vector-effect: non-scaling-stroke; }
+.print-grain {
+  position: absolute;
+  z-index: 15;
+  inset: 0;
+  pointer-events: none;
+  opacity: .12;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.32'/%3E%3C/svg%3E");
+}
+.vinyl-mark {
+  position: absolute;
+  z-index: -1;
+  top: 17%;
+  left: 36%;
+  width: min(30vw, 440px);
+  aspect-ratio: 1;
+  border: 1px solid rgba(201,170,114,.16);
+  border-radius: 50%;
+  background: repeating-radial-gradient(circle, transparent 0 9px, rgba(201,170,114,.04) 10px 11px, transparent 12px 19px);
+  animation: vinyl-turn 100s linear infinite;
+}
+.vinyl-mark::before, .vinyl-mark span {
+  position: absolute;
+  inset: 11%;
+  border: 1px solid rgba(201,170,114,.1);
+  border-radius: 50%;
+  content: "";
+}
+.vinyl-mark span { inset: 44%; border-color: rgba(189,85,70,.7); }
+.photo, .gif-frame {
+  position: absolute;
+  z-index: 2;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid rgba(238,232,216,.32);
+  background: #191816;
+  box-shadow: 0 16px 55px rgba(0,0,0,.4);
+  animation: photo-float 13s ease-in-out infinite alternate;
+}
+.photo img, .gif-frame img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.photo img { filter: grayscale(.66) sepia(.18) contrast(1.05); transition: filter 1.2s ease, transform 8s ease; }
+.photo:hover img { filter: grayscale(.12) sepia(.08) contrast(1.08); transform: scale(1.05); }
+.photo figcaption {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  min-height: 34px;
+  padding: 7px 9px 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  gap: 3px;
+  background: linear-gradient(transparent, rgba(12,12,11,.94));
+  text-shadow: 0 1px 5px #000;
+}
+.photo figcaption strong { font: 700 9px "Space Grotesk", sans-serif; letter-spacing: .13em; }
+.photo figcaption small { color: rgba(238,232,216,.72); font-size: 6px; font-weight: 500; letter-spacing: .08em; }
+.photo-racionais { top: 5%; left: 3%; width: 22%; height: 33%; transform: rotate(-2.2deg); }
+.photo-racionais img { object-position: 52% 48%; }
+.photo-sabotage { top: 10%; left: 28%; width: 12%; height: 31%; transform: rotate(2deg); animation-delay: -3s; }
+.photo-sabotage img { object-position: 50% 28%; }
+.photo-emicida { top: 8%; right: 25%; width: 14%; height: 32%; transform: rotate(-1.4deg); animation-delay: -5s; }
+.photo-emicida img { object-position: 50% 18%; }
+.photo-milton { top: 7%; right: 3%; width: 20%; height: 29%; transform: rotate(1.6deg); animation-delay: -8s; }
+.photo-milton img { object-position: 48% 35%; }
+.photo-dj { top: 4%; left: 44%; width: 11%; height: 28%; transform: rotate(.9deg); animation-delay: -7s; }
+.photo-dj img { object-position: 50% 65%; }
+.photo-breaking { top: 49%; left: 22%; width: 14%; height: 19%; transform: rotate(-1.3deg); animation-delay: -5s; }
+.photo-breaking img { object-position: 58% 50%; }
+.photo-graffiti { top: 47%; right: 21%; width: 15%; height: 19%; transform: rotate(1.7deg); animation-delay: -10s; }
+.photo-graffiti img { object-position: 50% 50%; }
+.photo-criolo { bottom: 8%; left: 10%; width: 13%; height: 31%; transform: rotate(1.8deg); animation-delay: -6s; }
+.photo-criolo img { object-position: 54% 22%; }
+.photo-negra { right: 9%; bottom: 9%; width: 13%; height: 31%; transform: rotate(-1.9deg); animation-delay: -2s; }
+.photo-negra img { object-position: 45% 21%; }
+.photo-tassia { right: 25%; bottom: 6%; width: 12%; height: 31%; transform: rotate(1.4deg); animation-delay: -9s; }
+.photo-tassia img { object-position: 50% 23%; }
+.gif-frame { z-index: 5; border-color: rgba(201,170,114,.65); animation-duration: 17s; }
+.gif-frame img { object-fit: contain; }
+.gif-frame figcaption {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 5px 7px;
+  background: rgba(17,17,16,.88);
+  color: var(--ochre);
+  font-size: 6px;
+  font-weight: 700;
+  letter-spacing: .12em;
+}
+.gif-resistance { top: 42%; left: 4%; width: 17%; height: auto; aspect-ratio: 16/9; transform: rotate(-2deg); }
+.gif-territory { top: 45%; right: 4%; width: 17%; height: auto; aspect-ratio: 16/9; transform: rotate(1.5deg); animation-delay: -7s; }
+.gif-voices { bottom: 5%; left: 27%; width: 16%; height: auto; aspect-ratio: 16/9; transform: rotate(-1.5deg); animation-delay: -4s; }
+.headline {
+  position: absolute;
+  z-index: 8;
+  top: 38%;
+  left: 50%;
+  width: 42%;
+  padding: 17px 10px 20px;
+  text-align: center;
+  transform: translate(-50%,-50%);
+}
+.headline::before {
+  position: absolute;
+  z-index: -1;
+  inset: -22px -48px;
+  border: 1px solid rgba(238,232,216,.12);
+  background: radial-gradient(ellipse, rgba(17,17,16,.94), rgba(17,17,16,.72) 58%, transparent 76%);
+  content: "";
+}
+.headline > p { margin: 0; color: var(--ochre); font-size: 8px; font-weight: 700; letter-spacing: .24em; }
+.headline h1 {
+  margin: 13px 0 12px;
+  color: var(--paper);
+  font: 700 clamp(46px, 6.7vw, 106px)/.79 "Space Grotesk", sans-serif;
+  letter-spacing: -.105em;
+  white-space: nowrap;
+}
+.headline h1 em { color: var(--red); font-style: normal; }
+.headline > span { display: block; color: var(--muted); font: 500 clamp(10px, 1.05vw, 15px)/1.4 "DM Sans", sans-serif; letter-spacing: .03em; }
+.fragment {
+  position: absolute;
+  z-index: 7;
+  color: var(--paper);
+  font: 500 clamp(8px, .75vw, 11px)/1.45 "Space Grotesk", sans-serif;
+  letter-spacing: .1em;
+}
+.fragment b { color: var(--ochre); font-weight: 700; }
+.fragment-territory { top: 67%; left: 24%; transform: rotate(-4deg); }
+.fragment-knowledge { top: 61%; right: 22%; color: var(--muted); transform: rotate(3deg); }
+.route-mark {
+  position: absolute;
+  z-index: 3;
+  color: rgba(201,170,114,.68);
+  font: 600 7px "DM Sans", sans-serif;
+  letter-spacing: .15em;
+}
+.route-mark i { width: 6px; height: 6px; display: inline-block; margin-left: 6px; border-radius: 50%; background: var(--red); box-shadow: 0 0 12px var(--red); animation: location-pulse 2.8s ease-in-out infinite; }
+.route-mark-one { top: 43%; left: 24%; }
+.route-mark-two { right: 25%; bottom: 15%; }
+.map-note {
+  position: absolute;
+  z-index: 4;
+  color: var(--muted);
+  font-size: 7px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  writing-mode: vertical-rl;
+}
+.map-note span { margin-bottom: 5px; color: var(--red); }
+.map-note-one { top: 18%; left: 26.5%; }
+.map-note-two { top: 18%; right: 22.5%; }
+.artist-tape {
+  position: absolute;
+  z-index: 10;
+  top: 54%;
+  left: 50%;
+  width: 35%;
+  min-height: 27px;
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(5px, .7vw, 11px);
+  border: 1px solid rgba(201,170,114,.4);
+  background: rgba(17,17,16,.93);
+  color: var(--paper);
+  transform: translateX(-50%) rotate(-1deg);
+}
+.artist-tape span { font: 600 clamp(7px, .76vw, 11px) "Space Grotesk", sans-serif; letter-spacing: -.03em; white-space: nowrap; }
+.artist-tape i { color: var(--red); font-size: 8px; font-style: normal; }
+.women-cluster {
+  position: absolute;
+  z-index: 9;
+  right: 40%;
+  bottom: 5%;
+  width: 31%;
+}
+.cluster-label { display: block; margin-bottom: 6px; color: var(--ochre); font-size: 6px; font-weight: 700; letter-spacing: .16em; }
+.women-row { display: flex; gap: 5px; }
+.portrait-slot {
+  min-width: 0;
+  flex: 1;
+  height: clamp(30px, 5vh, 52px);
+  padding: 5px 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px dashed rgba(238,232,216,.32);
+  background: rgba(27,26,24,.75);
+  color: var(--paper);
+  font: 600 clamp(6px, .59vw, 8px) "Space Grotesk", sans-serif;
+  letter-spacing: .035em;
+}
+.portrait-slot small { color: var(--muted); font: 500 5px "DM Sans", sans-serif; letter-spacing: .1em; }
+.culture-tags {
+  position: absolute;
+  z-index: 9;
+  right: 3%;
+  bottom: 3%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: end;
+  gap: 4px;
+  width: 17%;
+}
+.culture-tags span { padding: 4px 5px; border: 1px solid rgba(238,232,216,.28); color: var(--muted); font-size: 5px; font-weight: 600; letter-spacing: .1em; }
+.margin-note {
+  position: absolute;
+  z-index: 3;
+  bottom: 4%;
+  left: 3%;
+  color: rgba(238,232,216,.48);
+  font-size: 6px;
+  font-weight: 600;
+  letter-spacing: .14em;
+}
+.colophon {
+  height: 7vh;
+  min-height: 48px;
+  border-top: 1px solid var(--rule);
+}
+.colophon i { color: var(--red); font-style: normal; }
+.soundwave { height: 18px; display: flex; align-items: center; gap: 2px; }
+.soundwave b { width: 2px; height: 6px; background: var(--red); animation: wave 1.6s ease-in-out infinite alternate; }
+.soundwave b:nth-child(3n) { height: 16px; animation-delay: -.8s; }
+.soundwave b:nth-child(2n) { height: 11px; animation-delay: -.35s; }
+.soundwave b:nth-child(5n) { height: 4px; animation-delay: -1.2s; }
+
+@keyframes vinyl-turn { to { rotate: 360deg; } }
+@keyframes photo-float { from { translate: 0 0; } to { translate: 0 -7px; } }
+@keyframes map-drift { from { transform: translate(-1%,1%); } to { transform: translate(1%,-1%); } }
+@keyframes location-pulse { 50% { opacity: .35; box-shadow: 0 0 3px var(--red); } }
+@keyframes wave { from { transform: scaleY(.35); opacity: .35; } to { transform: scaleY(1); opacity: .9; } }
+
+@media (max-width: 900px) {
+  body { min-height: 560px; }
+  .masthead-center { display: none; }
+  .photo-racionais { left: 2%; width: 24%; }
+  .photo-sabotage { left: 29%; width: 14%; }
+  .photo-emicida { right: 25%; width: 16%; }
+  .photo-milton { right: 2%; width: 22%; }
+  .photo-dj { left: 45%; width: 11%; }
+  .photo-breaking { left: 22%; width: 15%; }
+  .photo-graffiti { right: 20%; width: 16%; }
+  .photo-criolo { left: 7%; width: 15%; }
+  .photo-negra { right: 6%; width: 15%; }
+  .photo-tassia { right: 23%; width: 13%; }
+  .headline { width: 48%; }
+  .headline h1 { font-size: clamp(42px, 7.5vw, 72px); }
+  .artist-tape { top: 55%; width: 41%; }
+  .women-cluster { right: 39%; width: 33%; }
+}
+@media (max-width: 640px) {
+  body { height: auto; min-height: 100svh; overflow: auto; }
+  .masthead, .colophon { height: 56px; padding: 0 5vw; }
+  .masthead-date { font-size: 7px; }
+  .mural { height: auto; min-height: 1020px; }
+  .photo-racionais { top: 4%; left: 5%; width: 44%; height: 19%; }
+  .photo-sabotage { top: 10%; left: 55%; width: 19%; height: 22%; }
+  .photo-emicida { top: 5%; right: 4%; width: 18%; height: 22%; }
+  .photo-milton { top: 29%; right: 5%; width: 35%; height: 17%; }
+  .photo-dj { top: 24%; left: 47%; width: 18%; height: 14%; }
+  .photo-breaking { top: 48%; left: 45%; width: 20%; height: 12%; }
+  .photo-graffiti { top: 48%; right: 5%; width: 24%; height: 12%; }
+  .photo-criolo { bottom: 28%; left: 4%; width: 21%; height: 19%; }
+  .photo-negra { right: 5%; bottom: 27%; width: 21%; height: 19%; }
+  .photo-tassia { right: 29%; bottom: 25%; width: 17%; height: 20%; }
+  .gif-resistance { top: 28%; left: 5%; width: 38%; }
+  .gif-territory { top: 48%; right: 5%; width: 40%; }
+  .gif-voices { bottom: 8%; left: 5%; width: 38%; }
+  .headline { top: 47%; left: 50%; width: 85%; }
+  .headline h1 { font-size: clamp(50px, 12vw, 76px); }
+  .headline::before { inset: -15px -15px; background: radial-gradient(ellipse, rgba(17,17,16,.97), rgba(17,17,16,.88) 65%, transparent); }
+  .artist-tape { top: 61%; width: 86%; }
+  .artist-tape span { font-size: clamp(7px, 2vw, 10px); }
+  .women-cluster { right: 5%; bottom: 8%; width: 49%; }
+  .portrait-slot { height: 42px; font-size: 7px; }
+  .culture-tags { right: 5%; bottom: 3%; width: 49%; }
+  .culture-tags span { font-size: 6px; }
+  .fragment-territory { top: 69%; left: 8%; }
+  .fragment-knowledge, .map-note, .route-mark, .margin-note { display: none; }
+  .colophon { font-size: 6px; letter-spacing: .1em; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+}
